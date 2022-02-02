@@ -22,7 +22,7 @@
         <div class="col-xs-12">
           <h2 class="page-header">
             <i class="fa fa-globe"></i> Offer Details.
-            <small class="pull-right">Date: 2/10/2014</small>
+            <small class="pull-right">Date: {{$offer->created_at}}</small>
           </h2>
         </div>
         <!-- /.col -->
@@ -32,22 +32,22 @@
         <div class="col-sm-4 invoice-col">
           <address>
             <strong>Title :</strong><br>
-            Site web<br>
+            {{$offer->title}}<br>
           </address>
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
           <address>
             <strong>Company Name :</strong><br>
-            TAC-TIC<br>
+            {{$offer->company}}<br>
           </address>
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
-          <b>Offer ID:</b> #1<br>
+          <b>Offer ID:</b> #{{$offer->id}}<br>
         </div>
         <div class="col-sm-4 invoice-col">
-          <b>Published By:</b> Ahmed<br>
+          <b>Published By:</b> {{$offer->user->name}}<br>
         </div>
         <!-- /.col -->
       </div>
@@ -65,8 +65,7 @@
         <div class="col-xs-12 table-responsive">
         <div class="col-xs-6">
           <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg
-            dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
+          {{$offer->description}}
           </p>
         </div>
         </div>
@@ -74,27 +73,9 @@
       </div>
       <!-- /.row -->
 
-      <div class="row">
-        <!-- accepted payments column -->
-        
-        <!-- /.col -->
-        <div class="col-xs-6">
-
-          <div class="table-responsive">
-            <table class="table">
-              <tbody>
-              <tr>
-                <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-                        <i class="fa fa-download"></i> Caher De Charge
-                </button>
-              </tr>
-            </tbody></table>
-          </div>
-        </div>
-        <!-- /.col -->
-      </div>
+      
       <!-- /.row -->
-
+      <center><iframe src="{{ asset("img/offers/pdf/".$offer->filePath)}}" height="500" width="700"></iframe></center>
       <!-- this row will not appear when printing -->
       <div class="row no-print">
         <div class="col-xs-12">

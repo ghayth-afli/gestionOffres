@@ -19,14 +19,15 @@
 		<div class="box-body">
 			<div class="row">
 				<div class="col-md-12">	
-					 <form action="{{ route('offer.store') }}" method="post">
-                        {{ csrf_field() }}
+					 <form action="{{ route('offer.update',$offer->id) }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
                         <input type="hidden" name="active" value="1">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                                     <label for="nome">Title</label>
-                                    <input type="text" name="title" class="form-control"  placeholder="Title" required=""  autofocus>
+                                    <input type="text" name="title" class="form-control" value={{$offer->title}} placeholder="Title" required=""  autofocus>
                                     @if($errors->has('title'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('title') }}</strong>
@@ -37,7 +38,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group {{ $errors->has('company') ? 'has-error' : '' }}">
                                     <label for="nome">Company</label>
-                                    <input type="text" name="company" class="form-control" placeholder="Company" required="" >
+                                    <input type="text" name="company" class="form-control" value={{$offer->company}} placeholder="Company" required="" >
                                     @if($errors->has('company'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('email') }}</strong>
@@ -48,7 +49,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
                                     <label>Description</label>
-                                    <textarea class="form-control" rows="3" placeholder="Description" name="description"></textarea>
+                                    <textarea class="form-control" rows="3" placeholder="Description" name="description" >{{$offer->description}}</textarea>
                                     @if($errors->has('description'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('description') }}</strong>

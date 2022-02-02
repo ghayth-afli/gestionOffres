@@ -69,7 +69,8 @@ class OfferController extends Controller
      */
     public function show($id)
     {
-        //
+        $offer = Offer::find($id);
+        return view('offer.show', ['offer' => $offer]);
     }
 
     /**
@@ -80,7 +81,8 @@ class OfferController extends Controller
      */
     public function edit($id)
     {
-        //
+        $offer = Offer::find($id);
+        return view('offer.edit', ['offer' => $offer]);
     }
 
     /**
@@ -92,7 +94,29 @@ class OfferController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $offer = $request->validate([
+            'title' => 'required',
+            'company' => 'required',
+            'description' => 'required',
+            'filePath' => 'required',
+        ],[
+            'title.required' => 'title is required',
+            'company.required' => 'company is required',
+            'description.required' => 'description is required',
+            'filePath.required' => 'filePath is required'
+        ]);
+
+        $fileName = time() . $request->nom . '.' . $request->file('filePath')->extension();
+        $request->file('filePath')->move(public_path('img\offers\pdf'),$fileName);
+
+
+        $offer = Offer::find($id);
+        $offer->title =$request->title;
+        $offer->company =$request->company;
+        $offer->description =$request->description;
+        $offer->filePath =$fileName;
+        $offer->save();
+        return redirect('/offer')->with('success','Offer successfully updated!');
     }
 
     /**
@@ -103,6 +127,7 @@ class OfferController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Offer::destroy($id);
+        return redirect('/offer')->with('success','Offer successfully deleted!');
     }
 }
