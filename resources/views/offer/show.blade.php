@@ -73,7 +73,6 @@
       </div>
       <!-- /.row -->
 
-      
       <!-- /.row -->
       <center><iframe src="{{ asset("img/offers/pdf/".$offer->filePath)}}" height="500" width="700"></iframe></center>
       <!-- this row will not appear when printing -->
