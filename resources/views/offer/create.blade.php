@@ -20,8 +20,8 @@
 		<div class="box-body">
 			<div class="row">
 				<div class="col-md-12">	
-					 <form action="{{ route('offer.store') }}" method="post">
-                        {{ csrf_field() }}
+                    <form action="{{ route('offer.store') }}" method="post" enctype="multipart/form-data">
+					  @csrf
                         <input type="hidden" name="active" value="1">
                         <div class="row">
                             <div class="col-lg-6">

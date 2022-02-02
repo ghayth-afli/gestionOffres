@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Offer;
 use Illuminate\Http\Request;
-
+use DB;
 class OfferController extends Controller
 {
     /**
@@ -35,7 +35,30 @@ class OfferController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $offer = $request->validate([
+            'title' => 'required',
+            'company' => 'required',
+            'description' => 'required',
+            'filePath' => 'required',
+        ],[
+            'title.required' => 'title is required',
+            'company.required' => 'company is required',
+            'description.required' => 'description is required',
+            'filePath.required' => 'filePath is required'
+        ]);
+
+        $fileName = time() . $request->nom . '.' . $request->file('filePath')->extension();
+        $request->file('filePath')->move(public_path('img\offers\pdf'),$fileName);
+
+        Offer::create([
+            'title' => $request->input('title'),
+            'company' => $request->input('company'),
+            'description' => $request->input('description'),
+            'filePath' => $fileName,
+            'status' => "Available",
+            'user_id' => Auth()->user()->id,
+        ]);
+            return redirect('/offer')->with('success','Offre a été ajouté!');
     }
 
     /**

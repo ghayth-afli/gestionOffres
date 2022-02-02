@@ -18,7 +18,6 @@ class CreateOffersTable extends Migration
             $table->string('title');
             $table->string('company');
             $table->text('description');
-            $table->string('imagePath');
             $table->string('filePath');
             $table->string('status');
             $table->foreignId('user_id')->constrained();

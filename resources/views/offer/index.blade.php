@@ -37,34 +37,37 @@
                 </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 4.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td> 4</td>
-                    <td><span class="label label-success">Available</span></td>
-                    <td class="text-center"> 
-												 <a class="btn btn-default  btn-xs" href="" title="See Offer"><i class="fa fa-eye">   </i></a>
-												 <a class="btn btn-warning  btn-xs" href="" title="Edit Offer"><i class="fa fa-pencil"></i></a> 
-												 <a class="btn btn-danger  btn-xs" href="#" title="Delete Offer" data-toggle="modal" data-target="#modal-delete-2"><i class="fa fa-trash"></i></a> 
-										</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 4.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td> 4</td>
-                    <td><span class="label label-danger">Not Available</span></td>
-                    <td class="text-center"> 
-												 <a class="btn btn-default  btn-xs" href="" title="See Offer"><i class="fa fa-eye">   </i></a>
-												 <a class="btn btn-warning  btn-xs" href="" title="Edit Offer"><i class="fa fa-pencil"></i></a> 
-												 <a class="btn btn-danger  btn-xs" href="#" title="Delete Offer" data-toggle="modal" data-target="#modal-delete-2"><i class="fa fa-trash"></i></a> 
-										</td>
-                  </tr>
+                @foreach($offers as $offer)
+                  @if($offer->status == "Available")
+                    <tr>
+                      <td>{{$offer->title}}</td>
+                      <td>{{$offer->company}}
+                      </td>
+                      <td>{{substr($offer->description,0,70)."..."}}</td>
+                      <td> {{$offer->created_at}} </td>
+                      <td><span class="label label-success">{{$offer->status}}</span></td>
+                      <td class="text-center"> 
+                          <a class="btn btn-default  btn-xs" href="" title="See Offer"><i class="fa fa-eye">   </i></a>
+                          <a class="btn btn-warning  btn-xs" href="" title="Edit Offer"><i class="fa fa-pencil"></i></a> 
+                          <a class="btn btn-danger  btn-xs" href="#" title="Delete Offer" data-toggle="modal" data-target="#modal-delete-2"><i class="fa fa-trash"></i></a> 
+                      </td>
+                    </tr>
+                  @else
+                    <tr>
+                      <td>{{$offer->title}}</td>
+                      <td>{{$offer->company}}
+                      </td>
+                      <td>{{substr($offer->description,0,70)."..."}}</td>
+                      <td> {{$offer->created_at}}</td>
+                      <td><span class="label label-danger">{{$offer->status}}</span></td>
+                      <td class="text-center"> 
+                          <a class="btn btn-default  btn-xs" href="" title="See Offer"><i class="fa fa-eye">   </i></a>
+                          <a class="btn btn-warning  btn-xs" href="" title="Edit Offer"><i class="fa fa-pencil"></i></a> 
+                          <a class="btn btn-danger  btn-xs" href="#" title="Delete Offer" data-toggle="modal" data-target="#modal-delete-2"><i class="fa fa-trash"></i></a> 
+                      </td>
+                    </tr>
+                  @endif
+                @endforeach
                 </tbody>
                 <tfoot>
                   <tr>

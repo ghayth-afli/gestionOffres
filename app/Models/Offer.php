@@ -12,7 +12,6 @@ class Offer extends Model
         'title',
         'company',
         'description',
-        'imagePath',
         'filePath',
         'status',
         'user_id',
