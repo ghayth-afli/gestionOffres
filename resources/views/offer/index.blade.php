@@ -48,12 +48,14 @@
                       <td><span class="label label-success">{{$offer->status}}</span></td>
                       <td class="text-center"> 
                           <a class="btn btn-default  btn-xs" href="{{ route('offer.show',$offer->id) }}" title="See Offer"><i class="fa fa-eye">   </i></a>
-                          <a class="btn btn-warning  btn-xs" href="{{ route('offer.edit',$offer->id) }}" title="Edit Offer"><i class="fa fa-pencil"></i></a> 
-                          <a class="btn btn-danger  btn-xs" href="javascript:;" onclick="document.getElementById({{$offer->id}}).submit();" title="Delete Offer" data-toggle="modal" data-target="#modal-delete-2"><i class="fa fa-trash"></i></a> 
-                          <form action="{{ route('offer.destroy',$offer->id) }}" method="post" id={{$offer->id}}>
-                            @csrf
-                            @method('DELETE')
-                          </form>
+                          @if (Auth::user()->can('create-offer', 'edit-offer', 'destroy-offer'))
+                            <a class="btn btn-warning  btn-xs" href="{{ route('offer.edit',$offer->id) }}" title="Edit Offer"><i class="fa fa-pencil"></i></a> 
+                            <a href="javascript:;" onclick="document.getElementById({{$offer->id}}).submit();" title="Delete Offer" data-toggle="modal" data-target="#modal-delete-2"><i class="fa fa-trash"></i></a> 
+                            <form action="{{ route('offer.destroy',$offer->id) }}" method="post" id={{$offer->id}}>
+                              @csrf
+                              @method('DELETE')
+                            </form>
+                          @endif
                         </td>
                     </tr>
                   @else
@@ -66,12 +68,14 @@
                       <td><span class="label label-danger">{{$offer->status}}</span></td>
                       <td class="text-center"> 
                           <a class="btn btn-default  btn-xs" href="{{ route('offer.show',$offer->id) }}" title="See Offer"><i class="fa fa-eye">   </i></a>
-                          <a class="btn btn-warning  btn-xs" href="{{ route('offer.edit',$offer->id) }}" title="Edit Offer"><i class="fa fa-pencil"></i></a> 
-                          <a href="javascript:;" onclick="document.getElementById({{$offer->id}}).submit();" title="Delete Offer" data-toggle="modal" data-target="#modal-delete-2"><i class="fa fa-trash"></i></a> 
-                          <form action="{{ route('offer.destroy',$offer->id) }}" method="post" id={{$offer->id}}>
-                            @csrf
-                            @method('DELETE')
-                          </form>
+                          @if (Auth::user()->can('create-offer', 'edit-offer', 'destroy-offer'))
+                            <a class="btn btn-warning  btn-xs" href="{{ route('offer.edit',$offer->id) }}" title="Edit Offer"><i class="fa fa-pencil"></i></a> 
+                            <a href="javascript:;" onclick="document.getElementById({{$offer->id}}).submit();" title="Delete Offer" data-toggle="modal" data-target="#modal-delete-2"><i class="fa fa-trash"></i></a> 
+                            <form action="{{ route('offer.destroy',$offer->id) }}" method="post" id={{$offer->id}}>
+                              @csrf
+                              @method('DELETE')
+                            </form>
+                          @endif
                         </td>
                     </tr>
                   @endif

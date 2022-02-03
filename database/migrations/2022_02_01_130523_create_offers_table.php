@@ -20,7 +20,7 @@ class CreateOffersTable extends Migration
             $table->text('description');
             $table->string('filePath');
             $table->string('status');
-            $table->foreignId('user_id')->constrained();
+            //$table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

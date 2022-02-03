@@ -13,6 +13,7 @@ class OfferController extends Controller
      */
     public function index()
     {
+        $this->authorize('show-offer', Offer::class);
         $offers = Offer::all();
         return view('offer.index', ['offers' =>   $offers]);
     }
@@ -24,6 +25,7 @@ class OfferController extends Controller
      */
     public function create()
     {
+        $this->authorize('create-offer', Offer::class);
         return view('offer.create');
     }
 
@@ -35,6 +37,7 @@ class OfferController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create-offer', Offer::class);
         $offer = $request->validate([
             'title' => 'required',
             'company' => 'required',
@@ -50,15 +53,16 @@ class OfferController extends Controller
         $fileName = time() . $request->nom . '.' . $request->file('filePath')->extension();
         $request->file('filePath')->move(public_path('img\offers\pdf'),$fileName);
 
-        Offer::create([
+        $off = Offer::create([
             'title' => $request->input('title'),
             'company' => $request->input('company'),
             'description' => $request->input('description'),
             'filePath' => $fileName,
             'status' => "Available",
-            'user_id' => Auth()->user()->id,
+            //'user_id' => Auth()->user()->id,
         ]);
-            return redirect('/offer')->with('success','Offre a été ajouté!');
+        $off->users()->attach(Auth()->user()->id);
+        return redirect('/offer')->with('success','Offre a été ajouté!');
     }
 
     /**
@@ -69,6 +73,7 @@ class OfferController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('show-offer', Offer::class);
         $offer = Offer::find($id);
         return view('offer.show', ['offer' => $offer]);
     }
@@ -81,6 +86,7 @@ class OfferController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('edit-offer', Offer::class);
         $offer = Offer::find($id);
         return view('offer.edit', ['offer' => $offer]);
     }
@@ -94,6 +100,7 @@ class OfferController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('edit-offer', Offer::class);
         $offer = $request->validate([
             'title' => 'required',
             'company' => 'required',
@@ -118,6 +125,37 @@ class OfferController extends Controller
         $offer->save();
         return redirect('/offer')->with('success','Offer successfully updated!');
     }
+    /**
+     * Accept the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function accept($id)
+    {
+        $offer = Offer::find($id);
+        $offer->status = "Not Available";
+        $offer->save();
+        $offer->users()->attach(Auth()->user()->id);
+        return redirect('/offer')->with('success','Offer successfully Accepted!');
+    }
+
+    /**
+     * Refuse the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function refuse($id)
+    {
+        $offer = Offer::find($id);
+        $offer->status = "Available";
+        $offer->save();
+        $offer->users()->detach(Auth()->user()->id);
+        return redirect('/offer')->with('success','Offer successfully Refused!');
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -127,6 +165,7 @@ class OfferController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('destroy-offer', Offer::class);
         Offer::destroy($id);
         return redirect('/offer')->with('success','Offer successfully deleted!');
     }

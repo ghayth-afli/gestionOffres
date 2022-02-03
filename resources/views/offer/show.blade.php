@@ -47,7 +47,24 @@
           <b>Offer ID:</b> #{{$offer->id}}<br>
         </div>
         <div class="col-sm-4 invoice-col">
-          <b>Published By:</b> {{$offer->user->name}}<br>
+          @foreach($offer->users as $user)
+            @foreach($user->roles as $role)
+              @if($role->label == "System Developer")
+                <b>Published By:{{$user->name}}</b> <br>
+              @endif
+            @endforeach
+          @endforeach
+
+          @if($offer->status == "Not Available")
+            @foreach($offer->users as $user)
+              @foreach($user->roles as $role)
+                @if($role->label == "Project Manager")
+                  <b>Accepted By:{{$user->name}}</b> <br>
+                @endif
+              @endforeach
+            @endforeach
+          @endif
+
         </div>
         <!-- /.col -->
       </div>
@@ -76,13 +93,30 @@
       <!-- /.row -->
       <center><iframe src="{{ asset("img/offers/pdf/".$offer->filePath)}}" height="500" width="700"></iframe></center>
       <!-- this row will not appear when printing -->
+
       <div class="row no-print">
         <div class="col-xs-12">
-          <button type="button" class="btn btn-success pull-right"><i class="fa fa-check"></i> Accept
-          </button>
-          
+
+          @if($offer->status == "Available")
+            @if(Auth::user()->roles == "Project Manager")
+              <a href="{{route('offer.accept',$offer->id)}}">
+              <button type="button" class="btn btn-success pull-right"><i class="fa fa-check"></i> Accept
+              </button>
+              </a>
+            @endif
+          @else
+            @foreach($offer->users as $user)
+              @if($user->id == Auth::user()->id)
+                <a href="{{route('offer.refuse',$offer->id)}}">
+                  <button type="button" class="btn btn-danger pull-right"><i class="fa fa-ban"></i> Refuse</button>
+                </a>
+              @endif
+            @endforeach
+          @endif
         </div>
       </div>
+
+
     </section>  
 
 @endsection

@@ -10,6 +10,7 @@ Route::get('/', 'App\Http\Controllers\HomeController@index');
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 Route::get('/config', 'App\Http\Controllers\ConfigController@index')->name('config');
 Route::put('/config/update/{id}', 'App\Http\Controllers\ConfigController@update')->name('config.update');
+Route::resource('offer',OfferController::class);
 
 Route::group(['namespace' => 'App\Http\Controllers\Profile'], function (){ 
 	Route::get('/profile', 'ProfileController@index')->name('profile');
@@ -43,4 +44,9 @@ Route::group(['namespace' => 'App\Http\Controllers\User'], function (){
 	Route::get('/role/destroy/{id}', 'RoleController@destroy')->name('role.destroy');
 });
 
-Route::resource('offer',OfferController::class);
+Route::group(['namespace' => 'App\Http\Controllers'], function (){ 
+
+	Route::get('/offer/accept/{id}', 'OfferController@accept')->name('offer.accept');
+	Route::get('/offer/refuse/{id}', 'OfferController@refuse')->name('offer.refuse');
+
+});

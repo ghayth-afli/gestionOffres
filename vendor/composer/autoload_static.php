@@ -572,6 +572,7 @@ class ComposerStaticIniteb8f55430fda97cc67815fb7e644a3c5
         'App\\Http\\Requests\\User\\UpdateUserRequest' => __DIR__ . '/../..' . '/app/Http/Requests/User/UpdateUserRequest.php',
         'App\\Models\\Config' => __DIR__ . '/../..' . '/app/Models/Config.php',
         'App\\Models\\Offer' => __DIR__ . '/../..' . '/app/Models/Offer.php',
+        'App\\Models\\OfferUser' => __DIR__ . '/../..' . '/app/Models/OfferUser.php',
         'App\\Models\\Permission' => __DIR__ . '/../..' . '/app/Models/Permission.php',
         'App\\Models\\PermissionGroup' => __DIR__ . '/../..' . '/app/Models/PermissionGroup.php',
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',

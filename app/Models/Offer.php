@@ -17,10 +17,13 @@ class Offer extends Model
         'user_id',
         
     ];
-
-
-    public function user()
+    public function permissions()
     {
-        return $this->belongsTo(User::class);
+    	return $this->belongsToMany(Permission::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
     }
 }

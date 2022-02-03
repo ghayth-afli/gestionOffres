@@ -144,7 +144,7 @@ class PermissionRoleTablesSeeder extends Seeder
         Permission::create([
             'permission_group_id' => '5',
             'name' => 'show-offer', 
-            'label'  => 'Create Offer'
+            'label'  => 'show Offer'
         ]);
 
         Permission::create([

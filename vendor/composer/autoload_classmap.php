@@ -42,6 +42,7 @@ return array(
     'App\\Http\\Requests\\User\\UpdateUserRequest' => $baseDir . '/app/Http/Requests/User/UpdateUserRequest.php',
     'App\\Models\\Config' => $baseDir . '/app/Models/Config.php',
     'App\\Models\\Offer' => $baseDir . '/app/Models/Offer.php',
+    'App\\Models\\OfferUser' => $baseDir . '/app/Models/OfferUser.php',
     'App\\Models\\Permission' => $baseDir . '/app/Models/Permission.php',
     'App\\Models\\PermissionGroup' => $baseDir . '/app/Models/PermissionGroup.php',
     'App\\Models\\Role' => $baseDir . '/app/Models/Role.php',
