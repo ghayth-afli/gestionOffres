@@ -47,22 +47,27 @@
           <b>Offer ID:</b> #{{$offer->id}}<br>
         </div>
         <div class="col-sm-4 invoice-col">
-          @foreach($offer->users as $user)
-            @foreach($user->roles as $role)
-              @if($role->label == "System Developer")
-                <b>Published By:{{$user->name}}</b> <br>
-              @endif
+          @if($offer->status == "Available")
+            @foreach($offer->users as $user)
+                  <b>Published By:{{$user->name}}</b> <br>
             @endforeach
-          @endforeach
+          @endif
 
           @if($offer->status == "Not Available")
             @foreach($offer->users as $user)
-              @foreach($user->roles as $role)
-                @if($role->label == "Project Manager")
-                  <b>Accepted By:{{$user->name}}</b> <br>
-                @endif
+                @foreach($user->roles as $role)
+                  @if($role->label == "sales manager")
+                    <b>Published By:{{$user->name}}</b> <br>
+                  @endif
+                @endforeach
               @endforeach
-            @endforeach
+              @foreach($offer->users as $user)
+                @foreach($user->roles as $role)
+                  @if($role->label == "Project Manager")
+                    <b>Accepted By:{{$user->name}}</b> <br>
+                  @endif
+                @endforeach
+              @endforeach
           @endif
 
         </div>
@@ -98,12 +103,14 @@
         <div class="col-xs-12">
 
           @if($offer->status == "Available")
-            @if(Auth::user()->roles == "Project Manager")
-              <a href="{{route('offer.accept',$offer->id)}}">
-              <button type="button" class="btn btn-success pull-right"><i class="fa fa-check"></i> Accept
-              </button>
-              </a>
-            @endif
+            @foreach(Auth::user()->roles as $role)
+              @if($role->label == "Project Manager")
+                <a href="{{route('offer.accept',$offer->id)}}">
+                <button type="button" class="btn btn-success pull-right"><i class="fa fa-check"></i> Accept
+                </button>
+                </a>
+              @endif
+            @endforeach
           @else
             @foreach($offer->users as $user)
               @if($user->id == Auth::user()->id)

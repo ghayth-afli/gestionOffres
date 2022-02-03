@@ -70,7 +70,7 @@
 
                             <div class="col-lg-6"></div> 
                             <div class="col-lg-6">
-                               <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-fw fa-plus"></i> Update</button>
+                               <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-fw fa-plus"></i> Add</button>
                             </div>
                         </div>
                     </form>
