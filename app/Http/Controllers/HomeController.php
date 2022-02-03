@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\Offer;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -24,6 +26,10 @@ class HomeController extends Controller
      */
     public function index()
     {  
-        return view('home');       
+        $nbUsers=User::count();
+        $nbOffer=Offer::count();
+        $nbOfferAcc=Offer::where('status','Available')->count();
+        $nbOfferRef=Offer::where('status','Not Available')->count();
+        return view('home', ['nbUsers' =>   $nbUsers ,'nbOffer' =>   $nbOffer  ,'nbOfferAcc' =>   $nbOfferAcc ,'nbOfferRef' =>   $nbOfferRef]);       
     }
 }

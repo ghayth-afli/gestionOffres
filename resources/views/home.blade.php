@@ -12,7 +12,7 @@
         <!-- small box -->
         <div class="small-box bg-yellow">
           <div class="inner">
-            <h3>44</h3>
+            <h3>{{$nbUsers}}</h3>
 
             <p>Users</p>
           </div>
@@ -26,7 +26,7 @@
       <!-- small box -->
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3>150</h3>
+          <h3>{{$nbOffer}}</h3>
 
           <p>Offers</p>
         </div>
@@ -41,7 +41,7 @@
       <!-- small box -->
       <div class="small-box bg-green">
         <div class="inner">
-          <h3>53<sup style="font-size: 20px"></sup></h3>
+          <h3>{{$nbOfferAcc}}<sup style="font-size: 20px"></sup></h3>
 
           <p>Available Offers</p>
         </div>
@@ -57,7 +57,7 @@
       <!-- small box -->
       <div class="small-box bg-red">
         <div class="inner">
-          <h3>65</h3>
+          <h3>{{$nbOfferRef}}</h3>
 
           <p>Not Available Offers</p>
         </div>
