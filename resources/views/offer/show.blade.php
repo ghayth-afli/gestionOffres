@@ -54,7 +54,7 @@
           @endif
 
           @if($offer->status == "Not Available")
-            @foreach($offer->users as $user)
+              @foreach($offer->users as $user)
                 @foreach($user->roles as $role)
                   @if($role->label == "sales manager")
                     <b>Published By:{{$user->name}}</b> <br>
