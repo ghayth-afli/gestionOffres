@@ -60,4 +60,8 @@ class User extends Authenticatable
     public function offers(){
         return $this->belongsToMany(Offer::class);
     }
+
+    public function messages(){
+        return $this->hasMany(Message::class);
+    }
 }

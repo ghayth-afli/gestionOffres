@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         @include('layouts.AdminLTE._includes._head')
+        @livewireStyles
     </head>
     <body class="hold-transition skin-{{ \App\Models\Config::find(1)->skin }} {{ \App\Models\Config::find(1)->layout }} sidebar-mini">
         <div class="wrapper">
@@ -55,6 +56,6 @@
         </div>       
 
         @include('layouts.AdminLTE._includes._script_footer')
-
+        @livewireScripts
     </body>
 </html>

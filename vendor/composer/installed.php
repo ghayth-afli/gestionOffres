@@ -502,6 +502,15 @@
             'reference' => 'aa70e813a6ad3d1558fc927863d47309b4c23e69',
             'dev_requirement' => false,
         ),
+        'livewire/livewire' => array(
+            'pretty_version' => 'v2.10.1',
+            'version' => '2.10.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../livewire/livewire',
+            'aliases' => array(),
+            'reference' => '0d417b27791af09c79108eafd1344842f83a26ee',
+            'dev_requirement' => false,
+        ),
         'lucascudo/laravel-pt-br-localization' => array(
             'pretty_version' => 'v1.1.10',
             'version' => '1.1.10.0',
